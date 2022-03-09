@@ -1,5 +1,8 @@
 const { Sequelize, STRING, ENUM } = require("sequelize");
-const db = new Sequelize("postgres://localhost/dealers_choice_react_webpack");
+const db = new Sequelize(
+  process.env.DATABASE_URL ||
+    "postgres://localhost/dealers_choice_react_webpack"
+);
 
 const Wine = db.define("wine", {
   name: {
