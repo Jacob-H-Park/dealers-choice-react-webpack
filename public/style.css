@@ -5,3 +5,16 @@
 .deleteButton {
   margin-left: 5px;
 }
+
+.Cabernet {
+  color: red;
+}
+.Merlot {
+  color: maroon;
+}
+.Chardonnay {
+  color: cadetblue;
+}
+.PinotNoir {
+  color: salmon;
+}

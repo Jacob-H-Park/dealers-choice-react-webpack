@@ -21,9 +21,9 @@ const Wine = db.define("wine", {
 Wine.generateRandom = function () {
   const randomNumber = Math.ceil(Math.random() * 1000);
   let wineType = "";
-  if (randomNumber % 2 === 0) wineType = "Cabernet Sauvignon";
+  if (randomNumber % 4 === 0) wineType = "Cabernet Sauvignon";
   else if (randomNumber % 3 === 0) wineType = "Merlot";
-  else if (randomNumber % 5 === 0) wineType = "Chardonnay";
+  else if (randomNumber % 7 === 0) wineType = "Chardonnay";
   else wineType = "Pinot Noir";
   return this.create({ name: `Wine ${randomNumber}`, type: wineType });
 };

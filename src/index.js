@@ -33,6 +33,7 @@ export default class App extends Component {
 
   render() {
     const wines = this.state.wines;
+    let wineType = "";
     return (
       <div>
         <button className="button" onClick={this.create}>
@@ -41,7 +42,18 @@ export default class App extends Component {
         <div>
           {wines.map((wine) => {
             return (
-              <div key={wine.id}>
+              <div
+                key={wine.id}
+                className={
+                  wine.type === "Cabernet Sauvignon"
+                    ? "Cabernet"
+                    : wine.type === "Merlot"
+                    ? "Merlot"
+                    : wine.type === "Pinot Noir"
+                    ? "PinotNoir"
+                    : "Chardonnay"
+                }
+              >
                 {wine.id}. {wine.name} - {wine.type}
                 <button
                   className="deleteButton"
