@@ -41,12 +41,9 @@ Wine.generateRandom = function () {
 const syncAndSeed = async () => {
   try {
     await db.sync({ force: true });
-    const hello = await Wine.create({
-      name: "whatever",
-      type: "Cabernet Sauvignon",
-    });
+
     // await hello.update({ originId: 1 });
-    await Promise.All([
+    await Promise.all([
       Wine.create({
         name: "O’Shaughnessy",
         type: "Cabernet Sauvignon",
@@ -119,6 +116,17 @@ app.post("/api/wines", async (req, res, next) => {
     next(err);
   }
 });
+
+app.delete("/api/wines/:id", async (req, res, next) => {
+  try {
+    const wineToDelete = await Wine.findByPk(req.params.id);
+    await wineToDelete.destroy();
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get("/api/wines/:id", async (req, res, next) => {
   try {
     res.send(await Wine.findByPk(req.params.id));
@@ -127,4 +135,6 @@ app.get("/api/wines/:id", async (req, res, next) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, "/index.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+app.use("/dist", express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "public")));
